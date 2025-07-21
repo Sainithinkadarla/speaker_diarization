@@ -4,3 +4,4 @@ CACHEDIR.TAG
 pyvenv.cfg
 Transcription
 .env
+share/*
