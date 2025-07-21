@@ -3,3 +3,4 @@ Scripts/
 CACHEDIR.TAG
 pyvenv.cfg
 Transcription
+.env
