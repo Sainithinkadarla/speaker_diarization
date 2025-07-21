@@ -74,14 +74,14 @@ async def get_transcribe(file: UploadFile = File()):
                     csv_writer.writerow(["word", "start", "end"])
                     for result in transcription_result["words"]:
                         await csv_writer.writerow([result["text"], result["start"], result["end"]])
-                        
+
                 return FileResponse(path= csv_filepath, 
                                     media_type="text/csv",
                                     filename="transcript.csv")
             except Exception as e:
                 raise HTTPException(status_code= 500, detail= f"Failed to create csv file: {e}")
 
-            # return {"url": transcription_result}
+
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed to process: {e}")
         finally:
