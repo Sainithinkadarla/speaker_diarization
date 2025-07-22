@@ -6,3 +6,6 @@ Transcription
 .env
 share/*
 *__pycache__
+include
+*.lab
+*.rttm
