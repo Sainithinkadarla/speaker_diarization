@@ -2,3 +2,6 @@ python-multipart
 fastapi
 uvicorn
 aiofiles
+pyannote.audio
+torch
+torchaudio
