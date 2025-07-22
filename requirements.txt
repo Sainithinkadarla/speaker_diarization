@@ -5,3 +5,5 @@ aiofiles
 pyannote.audio
 torch
 torchaudio
+httpx
+dotenv
