@@ -95,7 +95,7 @@ async def get_transcribe(file: UploadFile = File()):
             file.file.close()
             # os.remove(csv_filepath)
 
-@app.post("/diarize", summary="Speaker Diarization completely using Assembly AI ")
+@app.post("/diarize", summary="Speaker Diarization completely using Assembly AI")
 async def diarize(file: UploadFile = File()):
     user_id = uuid.uuid4()
     base_url = "https://api.assemblyai.com"
@@ -129,8 +129,10 @@ async def diarize(file: UploadFile = File()):
                 except Exception as e:
                     raise HTTPException(status_code=500, detail = "Failed to get upload url from assembly ai")
                 try:
-                    data = {"audio_url": upload_url,
-                        "speech_model": "universal"}
+                    data = {
+                        "audio_url": upload_url,
+                        "speaker_labels": True
+                    }
                     transcribe_url = base_url+"/v2/transcript"
                     response = await client.post(transcribe_url, json=data, headers=headers)
                     transcription_id = response.json()['id']
@@ -157,6 +159,7 @@ async def diarize(file: UploadFile = File()):
                         csv_writer = writer(csvfile)
                         await csv_writer.writerow(["word", "start", "end", "speaker"])
                         for result in transcription_result["words"]:
+                            print(result)
                             await csv_writer.writerow([result["text"], result["start"], result["end"], result["speaker"]])
                     return FileResponse(path= csv_filepath,
                                         media_type="text/csv",
