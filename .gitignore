@@ -9,3 +9,4 @@ share/*
 include
 *.lab
 *.rttm
+*csv_files
