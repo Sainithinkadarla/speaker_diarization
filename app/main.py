@@ -16,6 +16,10 @@ csv_dir = "csv_files"
 os.makedirs("uploaded_files", exist_ok=True)
 os.makedirs(csv_dir,exist_ok=True)
 
+@app.get("/")
+def home():
+    return {"Message": "Welcome to Speaker diarization API\n Go to /docs to use api"}
+
 @app.post("/transcribe_diarize", summary="Transcription with Assembly AI and speaker diarization with pyannote")
 async def get_transcribe(file: UploadFile = File()):
     user_id = uuid.uuid4()
